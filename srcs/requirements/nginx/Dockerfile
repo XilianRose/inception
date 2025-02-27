@@ -2,6 +2,7 @@ FROM debian:bookworm-slim
 
 # Install nginx and openssl
 RUN apt-get update && \
+	apt-get upgrade -y && \
 	apt-get install -y --no-install-recommends nginx openssl && \
 	mkdir -p /etc/nginx/ssl && \
 	apt-get clean && \
@@ -15,7 +16,9 @@ RUN openssl genpkey -algorithm ed25519 -out /etc/nginx/ssl/inception.key && \
 	chmod 600 /etc/nginx/ssl/inception.key
 
 # Copy the nginx configuration file
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+
+# EXPOSE 443
 
 # Start nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
