@@ -1,4 +1,4 @@
 CREATE DATABASE IF NOT EXISTS my_database;
-CREATE USER IF NOT EXISTS 'my_user'@'%' IDENTIFIED BY 'my_password';
-GRANT ALL PRIVILEGES ON my_database;.* TO 'my_user';
+CREATE USER IF NOT EXISTS 'user_0'@'%' IDENTIFIED BY 'password_0';
+GRANT ALL PRIVILEGES ON my_database;.* TO 'user_0';
 FLUSH PRIVILEGES;

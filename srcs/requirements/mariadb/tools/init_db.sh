@@ -25,7 +25,5 @@ EOF
 mariadb -u root shutdown
 
 
-
-
 echo "Database setup complete."
 
