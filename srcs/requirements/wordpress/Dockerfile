@@ -1,9 +1,9 @@
-FROM debian:bookworm-slim
+FROM debian:bullseye-slim
 
 # Install wordpress & php
 RUN apt-get update && \
 	apt-get upgrade -y && \
-	apt-get install -y --no-install-recommends php php-mysql php8.4-fpm curl && \
+	apt-get install -y --no-install-recommends php php-mysql php-fpm curl && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
