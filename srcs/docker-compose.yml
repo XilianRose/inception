@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nginx:
     build: ./requirements/nginx
@@ -48,13 +46,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/inception/mariadb_data
+      device: ${BASE_DIR}/mariadb_data
       o: bind
   wordpress_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/inception/wordpress_data
+      device: ${BASE_DIR}/wordpress_data
       o: bind
 
 networks:
