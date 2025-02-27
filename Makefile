@@ -1,9 +1,22 @@
 NAME = inception
 
+ifeq ($(shell uname), Darwin)
+	BASE_DIR = /Users/michelle/inception
+else
+	BASE_DIR = /home/inception
+endif
+
+WP_DATA = $(BASE_DIR)/wordpress_data
+MDB_DATA = $(BASE_DIR)/mariadb_data
+
+export BASE_DIR
+
 all: up
 
 # Create and start the containers
 up: build
+	mkdir -p $(WP_DATA)
+	mkdir -p $(MDB_DATA)
 	docker-compose -f ./srcs/docker-compose.yml up -d
 
 # Stop and remove the containers + named volumes
@@ -29,6 +42,8 @@ clean:
 # Stop and remove the containers + ALL volumes + images + networks
 fclean: clean
 	docker system prune -f
+	rm -rf $(WP_DATA)
+	rm -rf $(MDB_DATA)
 
 re: fclean all
 
