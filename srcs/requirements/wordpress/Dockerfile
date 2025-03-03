@@ -1,9 +1,9 @@
 FROM debian:bullseye-slim
 
-# Install wordpress & php
+# Install packages necessary for wordpress
 RUN apt-get update && \
 	apt-get upgrade -y && \
-	apt-get install -y --no-install-recommends php php-mysql php-fpm curl && \
+	apt-get install -y --no-install-recommends ca-certificates php php-mysql php-fpm mariadb-client curl && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
