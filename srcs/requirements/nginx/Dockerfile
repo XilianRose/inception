@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM debian:bullseye
 
 # Install nginx and openssl
 RUN apt-get update && \
@@ -9,11 +9,17 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 # Generate a self-signed certificate & key
-RUN openssl genpkey -algorithm ed25519 -out /etc/nginx/ssl/inception.key && \
-	openssl req -new -x509 -key /etc/nginx/ssl/inception.key \
+RUN openssl req -x509 -nodes -newkey rsa:2048 \
+	-keyout /etc/nginx/ssl/inception.key \
 	-out /etc/nginx/ssl/inception.crt \
 	-subj "/C=NL/O=42/CN=mstegema.42.fr/UID=mstegema" && \
 	chmod 600 /etc/nginx/ssl/inception.key
+
+# RUN openssl genpkey -algorithm ed25519 -out /etc/nginx/ssl/inception.key && \
+# 	openssl req -new -x509 -key /etc/nginx/ssl/inception.key \
+# 	-out /etc/nginx/ssl/inception.crt \
+# 	-subj "/C=NL/O=42/CN=mstegema.42.fr/UID=mstegema" && \
+# 	chmod 600 /etc/nginx/ssl/inception.key
 
 # Copy the nginx configuration file
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
