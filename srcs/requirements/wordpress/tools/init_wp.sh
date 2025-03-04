@@ -22,10 +22,11 @@ fi
 # Configure WordPress
 echo "Configuring WordPress..."
 cd /var/www/html/wordpress
+sleep 10
 if [ -f /wp-config.php ]; then
 	echo "wp-config.php already exists."
 else
-	wp config create --dbhost=$DB_HOST --dbname=$DB_NAME --dbpass=$DB_ROOT_PASSWORD --dbuser=$DB_ADMIN_USER --dbpass=$DB_ADMIN_PASSWORD --allow-root
+	wp config create --dbhost=$DB_HOST --dbname=$DB_NAME --dbuser=$DB_ADMIN_USER --dbpass=$DB_ADMIN_PASSWORD --allow-root
 fi
 
 # Install WordPress
