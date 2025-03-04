@@ -7,7 +7,7 @@ sleep 10
 
 # Setup MariaDB
 echo "Running database setup..."
-mariadb -u root << EOF
+mariadb -u root -p$DB_ROOT_PASSWORD << EOF
 CREATE DATABASE IF NOT EXISTS $DB_NAME;
 ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD';
 CREATE USER IF NOT EXISTS '$DB_ADMIN_USER'@'%' IDENTIFIED BY '$DB_ADMIN_PASSWORD';
