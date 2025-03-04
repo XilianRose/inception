@@ -1,9 +1,9 @@
 NAME = inception
 
 ifeq ($(shell uname), Darwin)
-	BASE_DIR = /Users/michelle/inception
+	BASE_DIR = /Users/michelle/data
 else
-	BASE_DIR = /home/inception
+	BASE_DIR = /home/mstegema/data
 endif
 
 WP_DATA = $(BASE_DIR)/wordpress_data

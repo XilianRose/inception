@@ -16,7 +16,6 @@ RUN apt-get update && \
 # Copy the mariadb configuration file & script to initialize the database
 COPY ./conf/99-custom.cnf /etc/mysql/mariadb.conf.d/99-custom.cnf
 COPY ./tools/init_db.sh /docker-entrypoint-initdb.d/init_db.sh
-# COPY ./tools/init.sql /docker-entrypoint-initdb.d/init.sql
 
 # Change the permissions of the script
 RUN chmod +x /docker-entrypoint-initdb.d/init_db.sh
