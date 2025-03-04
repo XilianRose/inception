@@ -3,12 +3,13 @@
 # Start MariaDB
 service mariadb start
 
-sleep 5
+sleep 10
 
 # Setup MariaDB
 echo "Running database setup..."
 mariadb -u root << EOF
 CREATE DATABASE IF NOT EXISTS $DB_NAME;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASSWORD';
 CREATE USER IF NOT EXISTS '$DB_ADMIN_USER'@'%' IDENTIFIED BY '$DB_ADMIN_PASSWORD';
 GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_ADMIN_USER';
 FLUSH PRIVILEGES;
@@ -22,7 +23,7 @@ CREATE TABLE IF NOT EXISTS users (
 EOF
 
 # Stop MariaDB
-service mariadb stop
+mariadb-admin -u root -p$DB_ROOT_PASSWORD shutdown
 
 # Restart MariaDB in the foreground
 echo "Restarting MariaDB in the foreground..."
